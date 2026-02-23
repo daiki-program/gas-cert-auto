@@ -5,7 +5,7 @@
 Google Workspace（スプレッドシート、ドライブ、Gmail）を連携させた、社内向け研修修了証の自動発行・送付システムです。
 手動で行っていた修了証の作成・送付業務をGoogle Apps Script (JavaScript) により自動化し、ヒューマンエラーの防止と工数削減を実現しました。
 
-## 📂 システム全体構成
+### 📂 システム全体構成
 - **Google Spreadsheet**: 参加者リスト・発行ステータス管理
 - **Google Docs**: 修了証の雛形
 - **Google Drive**: 生成されたPDFの保存
