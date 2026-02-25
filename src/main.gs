@@ -109,9 +109,7 @@ function createCertificate(sheet, row, data) {
  * 2. バッチ処理: メール一括送信
  * 【重要】この関数は「時間主導型トリガー」として設定してください。
  */
-/**
- * 2. バッチ処理: メール一括送信（氏名・ID不備も検知する強化版）
- */
+
 function sendBatchEmails() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
@@ -130,6 +128,10 @@ function sendBatchEmails() {
   const range = sheet.getRange(2, 1, lastRow - 1, sheet.getLastColumn());
   //特定した範囲のデータを全部取り出す
   const values = range.getValues();
+  
+  // valuesの中から「ステータスが受講完了」かつ「承認がtrue」のデータが1つでもあるか確認
+  const hasTarget = values.some(row => row[COLS.STATUS] === '受講完了' && row[COLS.IS_APPROVED] === true);
+  if (!hasTarget) return; // 対象が1件もなければ、ここで処理を終了
   
   //集計用カウンターの準備（結果報告メールで使用）
   let sentCount = 0;
